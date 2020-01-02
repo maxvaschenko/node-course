@@ -8,7 +8,7 @@ const geocode = (address, cb) => {
     if (err) {
       cb("Geoservice is not available", undefined);
     } else if (res.body.message) {
-      console.log(res.body.message);
+      cb(res.body.message, undefined);
     } else {
       const lon = res.body.features[0].center[0];
       const lat = res.body.features[0].center[1];
