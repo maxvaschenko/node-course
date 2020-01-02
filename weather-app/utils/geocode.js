@@ -1,6 +1,9 @@
 const request = require("request");
 
 const geocode = (address, cb) => {
+  if (!address) {
+    return console.log("No address provided!");
+  }
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
     address
   )}.json?access_token=pk.eyJ1IjoibWF4aW1hbDkzIiwiYSI6ImNrNHdxd2UwazEwYjkzZG1yMHI3N2IwNnkifQ.422q83Ar6s23z2tCLZaoVQ&limit=1`;

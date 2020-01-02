@@ -1,7 +1,14 @@
 const { geocode } = require("./utils/geocode");
 const { forecast } = require("./utils/forecast");
 
-geocode("kiev", (err, data) => {
+const argParser = args => {
+  if (args.length > 2) {
+    const searchedArg = args.find(item => item.includes("--geocode"));
+    return searchedArg.split("--geocode=")[1];
+  }
+};
+
+geocode(argParser(process.argv), (err, data) => {
   if (err) {
     return console.log(err);
   } else {
