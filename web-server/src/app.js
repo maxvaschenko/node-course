@@ -25,7 +25,8 @@ app.get("/", (req, res) => {
 
 app.get("/about", (req, res) => {
   res.render("about", {
-    title: "Robot"
+    title: "Robot",
+    name: "Max Vashchenko"
   });
 });
 
@@ -33,14 +34,16 @@ app.get("/weather", (req, res) => {
   res.send({
     title: "Weather",
     forecast: "aaa",
-    location: ["a", "b", "c"]
+    location: ["a", "b", "c"],
+    name: "Max Vashchenko"
   });
 });
 
 app.get("/help", (req, res) => {
   res.render("help", {
     helpText: "This is help text",
-    title: "Help"
+    title: "Help",
+    name: "Max Vashchenko"
   });
 });
 
