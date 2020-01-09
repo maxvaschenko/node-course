@@ -30,6 +30,12 @@ app.get("/about", (req, res) => {
   });
 });
 
+app.get("/about/*", (req, res) => {
+  res.render("404", {
+    notFoundText: "Any additional about pages not found"
+  });
+});
+
 app.get("/weather", (req, res) => {
   res.send({
     title: "Weather",
@@ -39,11 +45,29 @@ app.get("/weather", (req, res) => {
   });
 });
 
+app.get("/weather/*", (req, res) => {
+  res.render("404", {
+    notFoundText: "Any additional weather pages not found"
+  });
+});
+
 app.get("/help", (req, res) => {
   res.render("help", {
     helpText: "This is help text",
     title: "Help",
     name: "Max Vashchenko"
+  });
+});
+
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    notFoundText: "Any additional help pages not found"
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render("404", {
+    notFoundText: "Not found!"
   });
 });
 
