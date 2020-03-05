@@ -13,10 +13,14 @@ const geocode = (address, cb) => {
     } else if (res.body.message) {
       cb(res.body.message, undefined);
     } else {
-      const lon = res.body.features[0].center[0];
-      const lat = res.body.features[0].center[1];
-      const location = res.body.features[0].place_name;
-      cb(undefined, { lat, lon, location });
+      if (!res.body.features[0]) {
+        cb("No match location!", undefined);
+      } else {
+        const lon = res.body.features[0].center[0];
+        const lat = res.body.features[0].center[1];
+        const location = res.body.features[0].place_name;
+        cb(undefined, { lat, lon, location });
+      }
     }
   });
 };
