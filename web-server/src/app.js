@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
+const { geocode } = require("./utils/geocode");
+const { forecast } = require("./utils/forecast");
 
 const app = express();
 
@@ -37,11 +39,22 @@ app.get("/about/*", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send({
-    title: "Weather",
-    forecast: "aaa",
-    location: ["a", "b", "c"],
-    name: "Max Vashchenko"
+  const { address } = req.query;
+  if (!address) {
+    return res.send({
+      error: "No address"
+    });
+  }
+  geocode(address, (err, { lat, lon, location } = {}) => {
+    if (err) {
+      return res.send({
+        error: err
+      });
+    } else {
+      forecast(lat, lon, (err, forecastData) => {
+        return res.send({ forecast: forecastData, location, address });
+      });
+    }
   });
 });
 
